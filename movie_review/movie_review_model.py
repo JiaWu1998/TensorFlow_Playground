@@ -2,23 +2,26 @@ import tensorflow as tf
 from tensorflow import keras
 import numpy as np
 
+# Get movie review data set from keras database
 data = keras.datasets.imdb
 
+# Seperate data set into training set and testing set
 (train_reviews, train_labels), (test_reviews, test_labels) = data.load_data(num_words = 10000)
 
+# Get the mapping of index and words
+# This returns a set of tuples. Here is what the tuple stores: (word,index)
 word_index = data.get_word_index()
 
-word_index = {k: (v+3) for k, v in word_index.items()}
-word_index["<PAD>"] = 0
-word_index["<START>"] = 1
-word_index["<UNK>"] = 2
-word_index["<UNUSED>"] = 3
-
-reversed_word_index = {v: k for k, v in word_index.items()}
+word_index = {(v+3): k for k, v in word_index.items()}
+word_index[0] = "<PAD>"
+word_index[1] = "<START>"
+word_index[2] = "<UNK>"
+word_index[3] = "<UNUSED>"
 
 def decode_review(encoded_review):
-    return " ".join([reversed_word_index.get(i, "?") for i in encoded_review])
+    return " ".join([word_index.get(i, "?") for i in encoded_review])
 
+# Normalize the reviews to have 250 words per review
 train_reviews = keras.preprocessing.sequence.pad_sequences(train_reviews, value=word_index["<PAD>"], padding="post", maxlen=250)
 test_reviews = keras.preprocessing.sequence.pad_sequences(test_reviews, value=word_index["<PAD>"], padding="post", maxlen=250)
 
