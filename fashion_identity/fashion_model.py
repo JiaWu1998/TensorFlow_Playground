@@ -20,7 +20,6 @@ train_images = train_images/255.0
 test_images = test_images/255.0 
 
 # Building the neural network model
-# This model has three layers
 # Layer 1: Flatten input layer with 28 x 28 neurons. Each neuron holds the pixel value of one pixel in the image
 # Layer 2: Hidden layer with 128 neurons. It uses the 'relu' activation function
 # Layer 3: Output layer with 10 neurons. Each neuron represents the one of the clothing. It uses the 'softmax' activation function 
