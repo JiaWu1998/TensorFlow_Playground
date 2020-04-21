@@ -27,9 +27,12 @@ test_loss, test_acc = model.evaluate(test_images, test_labels)
 
 predictions = model.predict(test_images)
 
-for i in range(10):
-    plt.grid(False)
-    plt.imshow(train_images[i])
-    plt.title(f"Prediction: {class_names[np.argmax(predictions[i])]}")
-    plt.xlabel(f"Actual: {class_names[test_labels[i]]}")
-    plt.show()
+# for i in range(10):
+#     plt.grid(False)
+#     plt.imshow(train_images[i])
+#     plt.title(f"Prediction: {class_names[np.argmax(predictions[i])]}")
+#     plt.xlabel(f"Actual: {class_names[test_labels[i]]}")
+#     plt.show()
+
+model.save("fashion_model.h5")
+
